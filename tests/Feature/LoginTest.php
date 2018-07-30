@@ -5,9 +5,17 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Models\User;
 
 class LoginTest extends TestCase
 {
+    use RefreshDatabase;
+
+    protected function setUp()
+    {
+        parent::setUp();
+    }
+
     public function testLoginValidationError()
     {
         $response = $this->json('POST', 'auth/login', []);
@@ -38,6 +46,7 @@ class LoginTest extends TestCase
 
     public function testLoginSuccess()
     {
+        factory(User::class)->create();
         $response = $this->json('POST', 'auth/login', [
             'username' => 'admin',
             'password' => 'admin'
