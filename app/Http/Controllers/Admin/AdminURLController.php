@@ -3,10 +3,29 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Repositories\URLRepositoryInterface;
 use App\Http\Controllers\Controller;
 
+/**
+ * Class AdminURLController
+ * @package App\Http\Controllers\Admin
+ */
 class AdminURLController extends Controller
 {
+    /**
+     * @var URLRepositoryInterface
+     */
+    private $URLRepository;
+
+    /**
+     * AdminURLController constructor.
+     * @param URLRepositoryInterface $repository
+     */
+    public function __construct(URLRepositoryInterface $repository)
+    {
+        $this->URLRepository = $repository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +33,7 @@ class AdminURLController extends Controller
      */
     public function index()
     {
-        return response()->json([]);
+        return response()->json($this->URLRepository->findAllURLs());
     }
 
     /**

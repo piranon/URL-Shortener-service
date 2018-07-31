@@ -15,6 +15,7 @@ $factory->define(URL::class, function (Faker $faker) {
     return [
         'code' => str_random(7),
         'url' => $faker->url,
+        'hits' => $faker->randomNumber(),
         'status' => $status,
         'expires_in' => $expiresIn,
     ];

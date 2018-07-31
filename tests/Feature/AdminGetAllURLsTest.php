@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Models\URL;
 
 class AdminGetAllURLsTest extends TestCase
 {
@@ -25,18 +26,19 @@ class AdminGetAllURLsTest extends TestCase
 
     public function testGetListURLs()
     {
+        factory(URL::class, 50)->create();
         $response = $this->json('GET', 'admin/urls');
         $response
             ->assertStatus(200)
-            ->assertJsonStructure([
+            ->assertJsonStructure([[
                 'id',
                 'code',
                 'url',
-                'status',
                 'hits',
-                'create_at',
-                'update_at',
-                'expire_in'
-            ]);
+                'status',
+                'expires_in',
+                'created_at',
+                'updated_at',
+            ]]);
     }
 }
