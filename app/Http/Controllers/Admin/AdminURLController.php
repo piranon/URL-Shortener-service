@@ -71,6 +71,8 @@ class AdminURLController extends Controller
             throw (new ModelNotFoundException)->setModel('URL');
         }
 
-        return response()->json(['message' => $url]);
+        $this->URLRepository->delete($url);
+
+        return response()->json(['success' => true], 202);
     }
 }

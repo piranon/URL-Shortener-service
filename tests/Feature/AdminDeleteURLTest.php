@@ -61,4 +61,18 @@ class AdminDeleteURLTest extends TestCase
                 'message' => 'URL not found'
             ]);
     }
+
+    public function testDeleteURLSuccess()
+    {
+        factory(URL::class, 50)->create();
+        $url = URL::where('status', URL::STATUS_ACTIVE)->first();
+        $response = $this->json('DELETE', 'admin/urls/' . $url->id);
+        $response
+            ->assertStatus(202)
+            ->assertJson([
+                'success' => true
+            ]);
+        $url = URL::find($url->id);
+        $this->assertEquals($url->status, URL::STATUS_DELETED);
+    }
 }

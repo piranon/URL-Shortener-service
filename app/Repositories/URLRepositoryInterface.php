@@ -13,4 +13,10 @@ interface URLRepositoryInterface
      * @return URL[]
      */
     public function findAllURLs();
+
+    /**
+     * @param URL $url
+     * @return void
+     */
+    public function delete(URL $url);
 }
