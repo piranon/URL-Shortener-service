@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\URL;
 use App\Repositories\URLRepositoryInterface;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 /**
@@ -66,6 +67,10 @@ class AdminURLController extends Controller
      */
     public function destroy(URL $url)
     {
+        if ($url->status === URL::STATUS_DELETED || $url->status === URL::STATUS_EXPIRED) {
+            throw (new ModelNotFoundException)->setModel('URL');
+        }
+
         return response()->json(['message' => $url]);
     }
 }

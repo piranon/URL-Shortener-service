@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Models\URL;
 use App\Models\User;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class AdminDeleteURLTest extends TestCase
 {
@@ -35,6 +35,30 @@ class AdminDeleteURLTest extends TestCase
             ->assertStatus(405)
             ->assertJson([
                 'message' => 'Method not allowed'
+            ]);
+    }
+
+    public function testDeleteURLButURLAlreadyDeleted()
+    {
+        factory(URL::class, 50)->create();
+        $url = URL::where('status', URL::STATUS_DELETED)->first();
+        $response = $this->json('DELETE', 'admin/urls/' . $url->id);
+        $response
+            ->assertStatus(404)
+            ->assertJson([
+                'message' => 'URL not found'
+            ]);
+    }
+
+    public function testDeleteURLButURLAlreadyExpired()
+    {
+        factory(URL::class, 50)->create();
+        $url = URL::where('status', URL::STATUS_EXPIRED)->first();
+        $response = $this->json('DELETE', 'admin/urls/' . $url->id);
+        $response
+            ->assertStatus(404)
+            ->assertJson([
+                'message' => 'URL not found'
             ]);
     }
 }
