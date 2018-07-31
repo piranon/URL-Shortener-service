@@ -17,9 +17,26 @@ class AdminGetAllURLsTest extends TestCase
 
     public function testNotFoundAnyURL()
     {
-        $response = $this->json('GET', 'admin/urls', []);
+        $response = $this->json('GET', 'admin/urls');
         $response
             ->assertStatus(200)
             ->assertJson([]);
+    }
+
+    public function testGetListURLs()
+    {
+        $response = $this->json('GET', 'admin/urls');
+        $response
+            ->assertStatus(200)
+            ->assertJsonStructure([
+                'id',
+                'code',
+                'url',
+                'status',
+                'hits',
+                'create_at',
+                'update_at',
+                'expire_in'
+            ]);
     }
 }
