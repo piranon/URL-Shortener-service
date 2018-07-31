@@ -18,11 +18,6 @@ class AdminDeleteURLTest extends TestCase
         auth()->login($user);
     }
 
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
     public function testDeleteURLNotFound()
     {
         $response = $this->json('DELETE', 'admin/urls/99');
@@ -30,6 +25,16 @@ class AdminDeleteURLTest extends TestCase
             ->assertStatus(404)
             ->assertJson([
                 'message' => 'URL not found'
+            ]);
+    }
+
+    public function testDeleteURLNotSentID()
+    {
+        $response = $this->json('DELETE', 'admin/urls/');
+        $response
+            ->assertStatus(405)
+            ->assertJson([
+                'message' => 'Method not allowed'
             ]);
     }
 }

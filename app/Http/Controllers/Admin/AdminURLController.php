@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\URL;
-use Illuminate\Http\Request;
-use App\Repositories\URLRepositoryInterface;
 use App\Http\Controllers\Controller;
+use App\Models\URL;
+use App\Repositories\URLRepositoryInterface;
+use Illuminate\Http\Request;
 
 /**
  * Class AdminURLController
@@ -62,7 +62,7 @@ class AdminURLController extends Controller
 
     /**
      * @param URL $url
-     * @return URL
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(URL $url)
     {

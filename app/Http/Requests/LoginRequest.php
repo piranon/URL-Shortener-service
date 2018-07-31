@@ -6,6 +6,10 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 
+/**
+ * Class LoginRequest
+ * @package App\Http\Requests
+ */
 class LoginRequest extends FormRequest
 {
     /**
