@@ -17,6 +17,8 @@ Route::middleware(['api'])->group(function () {
     Route::post('auth/login', 'LoginController@login');
 
     Route::middleware(['auth:api'])->group(function () {
-        Route::get('admin/urls', 'Admin\AdminURLController@index');
+        Route::resource('admin/urls', 'Admin\AdminURLController')->only([
+            'index', 'destroy'
+        ]);
     });
 });
