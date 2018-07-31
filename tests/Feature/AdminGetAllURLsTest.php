@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -14,6 +15,8 @@ class AdminGetAllURLsTest extends TestCase
     protected function setUp()
     {
         parent::setUp();
+        $user = factory(User::class)->create();
+        auth()->login($user);
     }
 
     public function testNotFoundAnyURL()

@@ -15,5 +15,8 @@ use Illuminate\Http\Request;
 
 Route::middleware(['api'])->group(function () {
     Route::post('auth/login', 'LoginController@login');
-    Route::get('admin/urls', 'Admin\AdminURLController@index');
+
+    Route::middleware(['auth:api'])->group(function () {
+        Route::get('admin/urls', 'Admin\AdminURLController@index');
+    });
 });
