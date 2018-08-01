@@ -29,4 +29,10 @@ interface URLRepositoryInterface
      * @param URL $url
      */
     public function save(URL $url);
+
+    /**
+     * @param string $code
+     * @return URL
+     */
+    public function findByCode($code);
 }

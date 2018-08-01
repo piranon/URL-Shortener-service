@@ -49,4 +49,15 @@ class URLController extends Controller
 
         return response()->json(['success' => true], 201);
     }
+
+    /**
+     * @param $code
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function code($code)
+    {
+        $url = $this->URLService->getURLByCode($code);
+
+        return response()->json(['url' => $url->url, 'status' => $url->status]);
+    }
 }

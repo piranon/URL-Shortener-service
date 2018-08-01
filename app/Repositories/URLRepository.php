@@ -57,4 +57,13 @@ class URLRepository implements URLRepositoryInterface
     {
         $url->save();
     }
+
+    /**
+     * @param string $code
+     * @return URL
+     */
+    public function findByCode($code)
+    {
+        return URL::where(['code' => $code])->first();
+    }
 }
