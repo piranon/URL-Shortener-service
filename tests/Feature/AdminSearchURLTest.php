@@ -20,9 +20,15 @@ class AdminSearchURLTest extends TestCase
 
     public function testSearchOnShortUrlFound()
     {
-        factory(URL::class, 10)->create();
-        $shortURLValue = 'test_search_on_short_url';
-        $response = $this->json('GET', 'admin/urls/search?short_url=' . $shortURLValue);
+        factory(URL::class, 50)->create();
+
+        $shortURLValue = 'XXXXXXX';
+
+        $url = URL::where('status', URL::STATUS_ACTIVE)->first();
+        $url->code = $shortURLValue;
+        $url->save();
+
+        $response = $this->json('GET', 'admin/urls/search?code=' . $shortURLValue);
         $response
             ->assertStatus(200)
             ->assertJsonStructure([[
@@ -35,6 +41,7 @@ class AdminSearchURLTest extends TestCase
                 'created_at',
                 'updated_at',
             ]])
-            ->assertSeeText($shortURLValue);
+            ->assertSeeText($shortURLValue)
+            ->assertEquals(1, count($response->decodeResponseJson()));
     }
 }
