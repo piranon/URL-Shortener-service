@@ -49,4 +49,12 @@ class URLRepository implements URLRepositoryInterface
     {
         return URL::where($values)->get();
     }
+
+    /**
+     * @param URL $url
+     */
+    public function save(URL $url)
+    {
+        $url->save();
+    }
 }

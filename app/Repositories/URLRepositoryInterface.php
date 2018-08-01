@@ -16,7 +16,6 @@ interface URLRepositoryInterface
 
     /**
      * @param URL $url
-     * @return void
      */
     public function delete(URL $url);
 
@@ -25,4 +24,9 @@ interface URLRepositoryInterface
      * @return URL[]
      */
     public function search(array $values);
+
+    /**
+     * @param URL $url
+     */
+    public function save(URL $url);
 }

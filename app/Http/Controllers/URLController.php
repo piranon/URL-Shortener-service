@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Factories\URLFactoriesInterface;
+use App\Repositories\URLRepositoryInterface;
 use Illuminate\Http\Request;
 
 /**
@@ -17,12 +18,19 @@ class URLController extends Controller
     private $URLFactory;
 
     /**
+     * @var URLRepositoryInterface
+     */
+    private $URLRepository;
+
+    /**
      * URLController constructor.
      * @param URLFactoriesInterface $URLFactory
+     * @param URLRepositoryInterface $repository
      */
-    public function __construct(URLFactoriesInterface $URLFactory)
+    public function __construct(URLFactoriesInterface $URLFactory, URLRepositoryInterface $repository)
     {
         $this->URLFactory = $URLFactory;
+        $this->URLRepository = $repository;
     }
 
     /**
@@ -36,7 +44,8 @@ class URLController extends Controller
 
         $url = $this->URLFactory->createURL($originalURL, $expire);
         $url->code = 'TEST';
-        $url->save();
+
+        $this->URLRepository->save($url);
 
         return response()->json(['success' => true], 201);
     }
