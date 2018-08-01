@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Factories;
+
 use App\Exceptions\URLIsNotValidException;
 use App\Models\URL;
 
@@ -10,6 +11,12 @@ use App\Models\URL;
  */
 class EloquentURLFactory implements URLFactoriesInterface
 {
+    /**
+     * @param $originalUrl
+     * @param string $expires
+     * @return URL
+     * @throws URLIsNotValidException
+     */
     public function createURL($originalUrl, $expires = '')
     {
         if (!$this->isURL($originalUrl)) {
@@ -30,6 +37,10 @@ class EloquentURLFactory implements URLFactoriesInterface
         return $url;
     }
 
+    /**
+     * @param $url
+     * @return bool
+     */
     private function isURL($url)
     {
         $test = '/^(http|https):\\/\\/[a-z0-9]+([\\-\\.]{1}[a-z0-9]+)*\\.[a-z]{2,5}'.'((:[0-9]{1,5})?\\/.*)?$/i';

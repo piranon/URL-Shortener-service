@@ -16,7 +16,7 @@ class CreateUrlTable extends Migration
     {
         Schema::create('url', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('code', 7);
+            $table->string('code')->nullable(true);
             $table->integer('hits')->default(0);
             $table->text('url');
             $table->string('status')->default(URL::STATUS_ACTIVE);
