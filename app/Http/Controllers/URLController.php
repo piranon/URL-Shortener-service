@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\URL;
+use App\Factories\URLFactoriesInterface;
 use Illuminate\Http\Request;
 
 /**
@@ -12,6 +12,20 @@ use Illuminate\Http\Request;
 class URLController extends Controller
 {
     /**
+     * @var URLFactoriesInterface
+     */
+    private $URLFactory;
+
+    /**
+     * URLController constructor.
+     * @param URLFactoriesInterface $URLFactory
+     */
+    public function __construct(URLFactoriesInterface $URLFactory)
+    {
+        $this->URLFactory = $URLFactory;
+    }
+
+    /**
      * @param Request $request
      * @return string
      */
@@ -20,10 +34,8 @@ class URLController extends Controller
         $originalURL = $request->input('url');
         $expire = $request->input('expire');
 
-        $url = new URL();
+        $url = $this->URLFactory->createURL($originalURL, $expire);
         $url->code = 'TEST';
-        $url->url = $originalURL;
-        $url->hits = 0;
         $url->save();
 
         return response()->json(['success' => true], 201);
