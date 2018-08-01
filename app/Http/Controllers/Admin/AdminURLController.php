@@ -53,6 +53,10 @@ class AdminURLController extends Controller
         return response()->json(['success' => true], 202);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function search(Request $request)
     {
         $inputs = $request->only(['code', 'url']);
