@@ -55,6 +55,10 @@ class Handler extends ExceptionHandler
             return response()->json(['message' => 'Method not allowed'], $exception->getStatusCode());
         }
 
+        if ($exception instanceof URLIsNotValidException) {
+            return response()->json(['message' => $exception->getMessage()], $exception->getCode());
+        }
+
         if (method_exists($exception, 'getModel')) {
             $modelName = class_basename($exception->getModel());
 

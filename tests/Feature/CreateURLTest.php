@@ -20,4 +20,15 @@ class CreateURLTest extends TestCase
             ]);
         $this->assertDatabaseHas('url', $data);
     }
+
+    public function testCreateWithInvalidURL()
+    {
+        $data = ['url' => 'https//www.google.co.th'];
+        $response = $this->json('POST', '/urls', $data);
+        $response
+            ->assertStatus(400)
+            ->assertJson([
+                'message' => 'URL is not valid',
+            ]);
+    }
 }

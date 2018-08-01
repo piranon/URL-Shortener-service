@@ -13,7 +13,7 @@ class EloquentURLFactory implements URLFactoriesInterface
     public function createURL($originalUrl, $expires = '')
     {
         if (!$this->isURL($originalUrl)) {
-            throw new URLIsNotValidException('URL is not valid');
+            throw new URLIsNotValidException('URL is not valid', 400);
         }
 
         $url = new URL();
