@@ -24,7 +24,7 @@ class URLRepository implements URLRepositoryInterface
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * @return URL[]
      */
     public function findAllURLs()
     {
@@ -39,5 +39,14 @@ class URLRepository implements URLRepositoryInterface
     {
         $url->status = URL::STATUS_DELETED;
         $url->save();
+    }
+
+    /**
+     * @param array $values
+     * @return URL[]
+     */
+    public function search(array $values)
+    {
+        return URL::where($values)->get();
     }
 }

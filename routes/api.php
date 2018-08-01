@@ -20,5 +20,6 @@ Route::middleware(['api'])->group(function () {
         Route::resource('admin/urls', 'Admin\AdminURLController')->only([
             'index', 'destroy'
         ]);
+        Route::get('admin/urls/search', 'Admin\AdminURLController@search');
     });
 });

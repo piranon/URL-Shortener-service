@@ -19,4 +19,10 @@ interface URLRepositoryInterface
      * @return void
      */
     public function delete(URL $url);
+
+    /**
+     * @param array $values
+     * @return URL[]
+     */
+    public function search(array $values);
 }

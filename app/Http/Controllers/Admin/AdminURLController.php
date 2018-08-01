@@ -52,4 +52,11 @@ class AdminURLController extends Controller
 
         return response()->json(['success' => true], 202);
     }
+
+    public function search(Request $request)
+    {
+        $inputs = $request->only(['code', 'url']);
+
+        return response()->json($this->URLRepository->search($inputs));
+    }
 }

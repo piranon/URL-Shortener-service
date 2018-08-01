@@ -41,7 +41,7 @@ class AdminSearchURLTest extends TestCase
                 'created_at',
                 'updated_at',
             ]])
-            ->assertSeeText($shortURLValue)
-            ->assertEquals(1, count($response->decodeResponseJson()));
+            ->assertSeeText($shortURLValue);
+        $this->assertEquals(1, count($response->decodeResponseJson()));
     }
 }
