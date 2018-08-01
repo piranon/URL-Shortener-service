@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use App\Models\URL;
-use App\Repositories\URLRepository;
+use App\Repositories\URLRepositoryInterface;
 use App\Services\URLService;
 use Hashids\Hashids;
 use Tests\TestCase;
@@ -20,7 +20,7 @@ class GenerateCodeTest extends TestCase
     {
         parent::setUp();
         $this->serviceHashMock = $this->createMock(Hashids::class);
-        $this->repositoryMock = $this->createMock(URLRepository::class);
+        $this->repositoryMock = $this->createMock(URLRepositoryInterface::class);
         $this->URLService = new URLService($this->serviceHashMock, $this->repositoryMock);
     }
 

@@ -4,10 +4,10 @@ namespace App\Repositories;
 use App\Models\URL;
 
 /**
- * Class URLRepository
+ * Class EloquentURLRepository
  * @package App\Repositories
  */
-class URLRepository implements URLRepositoryInterface
+class EloquentURLRepository implements URLRepositoryInterface
 {
     /**
      * @var URL
