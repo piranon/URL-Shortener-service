@@ -7,6 +7,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CreateURLTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function testCreateWithNoExpireDateURL()
     {
         $data = ['url' => 'https://www.google.co.th'];

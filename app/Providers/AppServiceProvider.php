@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Factories\EloquentURLFactory;
+use App\Factories\URLFactoriesInterface;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\URLRepositoryInterface;
 use App\Repositories\URLRepository;
@@ -26,5 +28,6 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(URLRepositoryInterface::class, URLRepository::class);
+        $this->app->bind(URLFactoriesInterface::class, EloquentURLFactory::class);
     }
 }
