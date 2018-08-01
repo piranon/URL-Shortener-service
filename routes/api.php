@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 Route::middleware(['api'])->group(function () {
     Route::post('auth/login', 'LoginController@login');
-
+    Route::post('urls', 'URLController@create');
     Route::middleware(['auth:api'])->group(function () {
         Route::resource('admin/urls', 'Admin\AdminURLController')->only([
             'index', 'destroy'

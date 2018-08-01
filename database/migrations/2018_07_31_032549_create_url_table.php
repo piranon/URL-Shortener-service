@@ -17,10 +17,10 @@ class CreateUrlTable extends Migration
         Schema::create('url', function (Blueprint $table) {
             $table->increments('id');
             $table->string('code', 7);
-            $table->integer('hits');
+            $table->integer('hits')->default(0);
             $table->text('url');
             $table->string('status')->default(URL::STATUS_ACTIVE);
-            $table->timestamp('expires_in');
+            $table->timestamp('expires_in')->nullable(true)->default(Null);
             $table->timestamps();
         });
     }
