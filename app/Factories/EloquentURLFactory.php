@@ -17,7 +17,7 @@ class EloquentURLFactory implements URLFactoriesInterface
      * @return URL
      * @throws URLIsNotValidException
      */
-    public function createURL($originalUrl, $expires = '')
+    public function createURL($originalUrl, $expires = null)
     {
         if (!$this->isURL($originalUrl)) {
             throw new URLIsNotValidException('URL is not valid', 400);
@@ -28,9 +28,9 @@ class EloquentURLFactory implements URLFactoriesInterface
         $url->url = $originalUrl;
         $url->hits = 0;
         $url->status = URL::STATUS_ACTIVE;
-        $url->expires_in = $expires;
+        $url->expires_in = null;
 
-        if ($expires !== '') {
+        if ($expires !== null) {
             $url->expires_in = new \DateTime($expires);
         }
 
