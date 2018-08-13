@@ -58,6 +58,9 @@ class URLService
             throw (new ModelNotFoundException)->setModel('URL');
         }
 
+        $url->hits++;
+        $this->URLRepository->save($url);
+
         return $url;
     }
 }
